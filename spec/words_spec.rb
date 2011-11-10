@@ -14,7 +14,7 @@ describe Multiply::Words do
 
   describe "#acronym" do
     it "returns an array of acronyms" do
-      mw.acronym.each {|word| word.should match(/^[A-Z\-&\/]+$/) }
+      mw.acronym.each {|word| word.should match(/^[A-Z\-&\/\.\d]+$/) }
     end
   end
 
@@ -39,7 +39,9 @@ describe Multiply::Words do
 
   describe "#mixed" do
     it "returns an array of mixed case words" do
-      mw.mixed.each {|word| word.should match(/^[A-Za-z'\+&\-\/ ]+$/) }
+      mw.mixed.each {|word|
+        word.should match(/^[A-Za-z'\+&\-\/$\d(),\.:\\!<? ]+$/)
+      }
     end
   end
 
