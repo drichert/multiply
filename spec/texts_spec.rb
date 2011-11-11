@@ -2,17 +2,24 @@ require 'spec_helper'
 
 describe Multiply::Texts do
   let(:text_strings) {[
-    "This is a text about some stuff. The text explains things.",
-    "It is a text. It is not a manifesto."
+    "This is a long text. This text is longer than the short text.",
+    "This text is shorter than the long text."
   ]}
 
   let(:text_arrays) {[
-    text_strings.map {|s| s.split(/\s*/) }
+    ["This", "is", "a", "long", "text.", "This", "text",
+     "is", "longer", "than", "the", "short", "text."],
+    ["This", "text", "is", "shorter", "than", "the", "long", "text."]
+  ]}
+
+  let(:text_file_paths) {[
+    File.expand_path("../../share/texts/test/short.txt", __FILE__),
+    File.expand_path("../../share/texts/test/long.txt", __FILE__)
   ]}
 
   let(:text_files) {[
-    File.expand_path("../../share/texts/pg37948.txt", __FILE__),
-    File.expand_path("../../share/texts/pg37956.txt", __FILE__)
+    File.open(File.expand_path("../../share/texts/test/short.txt", __FILE__)),
+    File.open(File.expand_path("../../share/texts/test/long.txt", __FILE__))
   ]}
 
   describe "#initialize" do
