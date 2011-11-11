@@ -3,6 +3,7 @@ module Multiply
 
   autoload :WrapArray, 'multiply/wrap_array'
   autoload :Words,     'multiply/words'
+  autoload :Texts,     'multiply/texts'
 
   class << self
     def base_path
