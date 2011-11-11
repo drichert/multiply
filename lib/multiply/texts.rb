@@ -14,7 +14,7 @@ module Multiply
       def process_texts(texts)
         texts.map do |txt|
           if txt.is_a?(File)
-            txt = txt.read.split(/\s*/)
+            txt.read.split(/\s*/)
           elsif txt.is_a?(String)
             txt.split(/\s*/)
           elsif txt.is_a?(Array)
