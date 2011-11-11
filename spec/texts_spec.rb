@@ -37,10 +37,6 @@ describe Multiply::Texts do
       end
     end
 
-    it "assigns an instance of Multiply::Words to @words" do
-      @texts.instance_variable_get(:@words).should be_a(Multiply::Words)
-    end
-
     it "assigns loaded texts to @texts array" do
       @texts.instance_variable_get(:@texts).each {|txt|
         txt.should be_an(Array)
@@ -74,25 +70,14 @@ describe Multiply::Texts do
     it "accepts Array as text argument" do
       lambda { Multiply::Texts.new(*text_arrays) }.should_not raise_exception
     end
-  end
-
-  describe "#word" do
-    it "returns a word determined by multiplication"
-    it "increments @indexes value "
-
-    context "@indexes value is greater than length of corresponding @texts value" do
-      it "resets @indexes value to 0"
-    end
 
   end
 
-  describe "#cycle_complete?" do
-    context "when all values in @indexes are 0" do
-      it "returns true"
-    end
-
-    context "when there is at least one non-zero value in @indexes array" do
-      it "returns false"
+  describe "#texts" do
+    it "returns an array of arrays of words" do
+      Multiply::Texts.new(*text_strings).texts.each {|txt|
+        txt.each {|w| w.should be_a(String) }
+      }
     end
   end
 end

@@ -1,11 +1,12 @@
 module Multiply
   class Texts
+    attr_reader :texts
+
     def initialize(*texts)
       if texts.length < 2
         raise ArgumentError, "must specify at least 2 texts"
       end
 
-      @words = Words.new
       @texts = process_texts(texts)
       @indexes = ([0] * @texts.length)
     end
