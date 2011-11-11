@@ -1,12 +1,29 @@
 module Multiply
   class Texts
     def initialize(*texts)
-      @texts = []
-      texts.each_with_index {|txt|
-        @texts << txt.split(/\s*/)
-      }
+      if texts.length < 2
+        raise ArgumentError, "must specify at least 2 texts"
+      end
 
-      @indexs = ([0] * @texts.length)
+      @words = Words.new
+      @texts = process_texts(texts)
+      @indexes = ([0] * @texts.length)
     end
+
+    private
+      def process_texts(texts)
+        texts.map do |txt|
+          if txt.is_a?(File)
+            txt = txt.read.split(/\s*/)
+          elsif txt.is_a?(String)
+            txt.split(/\s*/)
+          elsif txt.is_a?(Array)
+            txt.map {|t| t.to_s }
+          else
+            raise ArgumentError, "invalid text argument"
+          end
+        end
+      end
+
   end
 end

@@ -12,11 +12,6 @@ describe Multiply::Texts do
     ["This", "text", "is", "shorter", "than", "the", "long", "text."]
   ]}
 
-  let(:text_file_paths) {[
-    File.expand_path("../../share/texts/test/short.txt", __FILE__),
-    File.expand_path("../../share/texts/test/long.txt", __FILE__)
-  ]}
-
   let(:text_files) {[
     File.open(File.expand_path("../../share/texts/test/short.txt", __FILE__)),
     File.open(File.expand_path("../../share/texts/test/long.txt", __FILE__))
@@ -29,6 +24,9 @@ describe Multiply::Texts do
       text_strings.each_index {|ndx|
         @texts.instance_variable_get(:@texts)[ndx].should be_an(Array)
       }
+      @texts.instance_variable_get(:@texts).each {|txt|
+        txt.each {|word| word.should be_a(String) }
+      }
     end
 
     describe "sets up @indexes array to track index positions in @texts" do
@@ -39,9 +37,43 @@ describe Multiply::Texts do
       end
     end
 
-    it "accepts a Multiple::Words object and assigns it to @words"
-    it "assigns loaded texts to @texts array"
-    it "raises an error if less than two texts are given"
+    it "assigns an instance of Multiply::Words to @words" do
+      @texts.instance_variable_get(:@words).should be_a(Multiply::Words)
+    end
+
+    it "assigns loaded texts to @texts array" do
+      @texts.instance_variable_get(:@texts).each {|txt|
+        txt.should be_an(Array)
+      }
+    end
+
+    it "raises an exception if less than two texts are given" do
+      expect {
+        Multiply::Texts.new(text_strings.first)
+      }.to raise_exception(
+        ArgumentError, "must specify at least 2 texts"
+      )
+    end
+
+    it "raises an exception if a text argument is not a File, Array, or String" do
+      expect {
+        Multiply::Texts.new(text_strings.first, 2)
+      }.to raise_exception(
+        ArgumentError, "invalid text argument"
+      )
+    end
+
+    it "accepts File as text argument" do
+      lambda { Multiply::Texts.new(*text_files) }.should_not raise_exception
+    end
+
+    it "accepts String as text argument" do
+      lambda { Multiply::Texts.new(*text_strings) }.should_not raise_exception
+    end
+
+    it "accepts Array as text argument" do
+      lambda { Multiply::Texts.new(*text_arrays) }.should_not raise_exception
+    end
   end
 
   describe "#word" do
