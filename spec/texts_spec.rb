@@ -6,11 +6,20 @@ describe Multiply::Texts do
     it "accepts a Multiple::Words object and assigns it to @words"
     it "assigns loaded texts to @texts array"
     it "sets up @indexes array to track index positions in @texts"
+    it "raises an error if less than two texts are given"
   end
 
   describe "#word" do
-    it "returns a word as determined by multiplication"
-    it "increments each value in @indexes array"
+    it "returns a word determined by multiplication"
+
+    context "@indexes value is less than length of corresponding @texts value"  do
+      it "increments @indexes value "
+    end
+
+    context "@indexes value is greater than length of corresponding @texts value" do
+      it "resets @indexes value to 0"
+    end
+
   end
 
   describe "#cycle_complete?" do
