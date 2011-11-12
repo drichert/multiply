@@ -1,21 +1,6 @@
 require 'spec_helper'
 
 describe Multiply::Texts do
-  let(:text_strings) {[
-    "This is a long text. This text is longer than the short text.",
-    "This text is shorter than the long text."
-  ]}
-
-  let(:text_arrays) {[
-    ["This", "is", "a", "long", "text.", "This", "text",
-     "is", "longer", "than", "the", "short", "text."],
-    ["This", "text", "is", "shorter", "than", "the", "long", "text."]
-  ]}
-
-  let(:text_files) {[
-    File.open(File.expand_path("../../share/texts/test/short.txt", __FILE__)),
-    File.open(File.expand_path("../../share/texts/test/long.txt", __FILE__))
-  ]}
 
   describe "#initialize" do
     before(:each) { @texts = Multiply::Texts.new(*text_strings) }
@@ -37,7 +22,7 @@ describe Multiply::Texts do
       end
     end
 
-    it "assigns loaded texts to @texts array" do
+    it "assigns loaded texts as arrays to @texts array" do
       @texts.instance_variable_get(:@texts).each {|txt|
         txt.should be_an(Array)
       }
@@ -59,15 +44,15 @@ describe Multiply::Texts do
       )
     end
 
-    it "accepts File as text argument" do
+    it "accepts Files as texts arguments" do
       lambda { Multiply::Texts.new(*text_files) }.should_not raise_exception
     end
 
-    it "accepts String as text argument" do
+    it "accepts Strings as texts arguments" do
       lambda { Multiply::Texts.new(*text_strings) }.should_not raise_exception
     end
 
-    it "accepts Array as text argument" do
+    it "accepts Arrays as texts arguments" do
       lambda { Multiply::Texts.new(*text_arrays) }.should_not raise_exception
     end
 
