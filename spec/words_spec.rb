@@ -46,6 +46,10 @@ describe Multiply::Words do
   end
 
   describe "#all" do
+    it "should return a WrapArray" do
+      mw.all.should be_a(Multiply::WrapArray)
+    end
+
     it "returns an array of all words" do
       pending "Takes a long time to run this spec"
 

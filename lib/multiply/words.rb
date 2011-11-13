@@ -22,7 +22,7 @@ module Multiply
     end
 
     def all
-      acronym + alnum + cap + lower + mixed
+      WrapArray.new(acronym + alnum + cap + lower + mixed)
     end
   end
 end
