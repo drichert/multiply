@@ -24,6 +24,10 @@ module Multiply
       word
     end
 
+    def cycle_complete?
+      @indexes.uniq == [0]
+    end
+
     private
       def wordlist_index(word, list_method = :all)
         @words.send(list_method).index(word)

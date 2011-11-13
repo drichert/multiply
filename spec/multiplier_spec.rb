@@ -80,11 +80,17 @@ describe Multiply::Multiplier do
 
   describe "#cycle_complete?" do
     context "when all values in @indexes are 0" do
-      it "returns true", :pending => true
+      it "returns true" do
+        multiplier.instance_variable_set(:@indexes, [0, 0])
+        multiplier.cycle_complete?.should be_true
+      end
     end
 
     context "when there is at least one non-zero value in @indexes array" do
-      it "returns false", :pending => true
+      it "returns false" do
+        multiplier.instance_variable_set(:@indexes, [0, 1])
+        multiplier.cycle_complete?.should be_false
+      end
     end
   end
 end
