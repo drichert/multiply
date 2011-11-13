@@ -15,8 +15,12 @@ module Multiply
     end
 
     def current_indexes
-      current.each.map {|word|
-      }
+      current.map {|word| wordlist_index(word) }
     end
+
+    private
+      def wordlist_index(word, list_method = :all)
+        @words.send(list_method).index(word)
+      end
   end
 end
