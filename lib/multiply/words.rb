@@ -18,6 +18,7 @@ module Multiply
             f.read.split("\n").reject {|ln| ln.start_with?("#") }
           )
         )
+        f.close
       }
     end
 
