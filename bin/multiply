@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+$:.unshift(File.expand_path('../../lib', __FILE__))
+
+require 'multiply'
+require 'yaml'
+
+files = ARGV.map {|path| File.open(path) }
+m = Multiply::Multiplier.new(*files)
+
+100.times {
+  puts m.next
+}
