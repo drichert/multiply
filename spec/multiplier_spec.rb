@@ -4,6 +4,12 @@ describe Multiply::Multiplier do
   let(:multiplier) {
     Multiply::Multiplier.new(*text_strings)
   }
+  let(:mock_words) {
+    mock(
+      Multiply::Words,
+      :all => Multiply::WrapArray.new(["one", "two", "three", "four", "five"])
+    )
+  }
 
   describe "#initialize" do
     it "assigns an instance of Multiply::Words to @words" do
@@ -39,22 +45,36 @@ describe Multiply::Multiplier do
 
   describe "#current_wordlist_indexes" do
     it "should return an array of indexes corresponding to wordlist positions of current words" do
-      m = multiplier
-      m.instance_variable_set(
-        :@words,
-        mock(Multiply::Words, :all => ["one", "two", "three", "four", "five"])
-      )
-      m.stub(:current).and_return(["two", "four", "one"])
-      m.current_wordlist_indexes.should eql([1, 3, 0])
+      multiplier.instance_variable_set(:@words, mock_words)
+      multiplier.stub(:current).and_return(["two", "four", "one"])
+      multiplier.current_wordlist_indexes.should eql([1, 3, 0])
     end
   end
 
   describe "#next" do
-    it "returns a word from wordlist determined by multiplication"
-    it "increments @indexes values"
+    it "returns a word from wordlist determined by multiplication" do
+      multiplier.instance_variable_set(:@words, mock_words)
+      multiplier.stub(:current_wordlist_indexes).and_return([1, 2, 3])
+      multiplier.next.should == "two"
+    end
+
+    describe "increments @indexes values" do
+      it "should increment each @indexes value by 1" do
+        orig_indexes = multiplier.instance_variable_get(:@indexes).dup
+        multiplier.next
+        multiplier.instance_variable_get(:@indexes).each_with_index {|v, ndx|
+          v.should == orig_indexes[ndx] + 1
+        }
+      end
+    end
 
     context "@indexes value is greater than length of corresponding @texts value" do
-      it "resets @indexes value to 0"
+      it "resets @indexes value to 0" do
+        m = Multiply::Multiplier.new(["a", "b", "c", "d"], ["e", "f", "g"])
+        m.instance_variable_set(:@indexes, [3, 2])
+        m.next
+        m.instance_variable_get(:@indexes)[0].should == 0
+      end
     end
   end
 
