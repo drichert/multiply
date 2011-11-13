@@ -8,6 +8,10 @@ require 'yaml'
 files = ARGV.map {|path| File.open(path) }
 m = Multiply::Multiplier.new(*files)
 
-100.times {
-  puts m.next
-}
+loop do
+  if m.cycle_complete?
+    puts "**** **** **** ****"
+  end
+
+  print "#{m.next} "
+end
