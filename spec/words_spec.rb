@@ -5,9 +5,9 @@ describe Multiply::Words do
   let(:mw) { Multiply::Words.new }
 
   describe "#initialize" do
-    it "loads all word lists" do
+    it "loads all word lists as WrapArrays" do
       lists.each {|list|
-        mw.send(list.to_sym).should be_an(Array)
+        mw.send(list.to_sym).should be_a(Multiply::WrapArray)
       }
     end
   end
@@ -56,6 +56,7 @@ describe Multiply::Words do
       }
     end
   end
+
 end
 
 

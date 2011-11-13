@@ -14,7 +14,9 @@ module Multiply
         )
         instance_variable_set(
           "@#{list}".to_sym,
-          f.read.split("\n").reject {|ln| ln.start_with?("#") }
+          WrapArray.new(
+            f.read.split("\n").reject {|ln| ln.start_with?("#") }
+          )
         )
       }
     end
