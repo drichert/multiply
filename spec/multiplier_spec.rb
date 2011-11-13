@@ -58,6 +58,13 @@ describe Multiply::Multiplier do
       multiplier.next.should == "two"
     end
 
+    context "when one of the current words is not found in wordlist" do
+      it "should not include that word's index when multiplying" do
+        multiplier.stub(:current_wordlist_indexes).and_return([nil, 2, 3])
+        lambda { multiplier.next }.should_not raise_error
+      end
+    end
+
     describe "increments @indexes values" do
       it "should increment each @indexes value by 1" do
         orig_indexes = multiplier.instance_variable_get(:@indexes).dup

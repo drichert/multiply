@@ -19,7 +19,7 @@ module Multiply
     end
 
     def next
-      word = @words.all[current_wordlist_indexes.reduce(:*)]
+      word = @words.all[next_index]
       increment_indexes
       word
     end
@@ -31,6 +31,11 @@ module Multiply
     private
       def wordlist_index(word, list_method = :all)
         @words.send(list_method).index(word)
+      end
+
+      # Multiply current wordlist indexes (removing nils)
+      def next_index
+        current_wordlist_indexes.compact.reduce(:*)
       end
 
       def increment_indexes
