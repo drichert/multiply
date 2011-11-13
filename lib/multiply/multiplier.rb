@@ -14,7 +14,7 @@ module Multiply
       words
     end
 
-    def current_indexes
+    def current_wordlist_indexes
       current.map {|word| wordlist_index(word) }
     end
 

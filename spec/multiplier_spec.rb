@@ -37,7 +37,7 @@ describe Multiply::Multiplier do
     end
   end
 
-  describe "#current_indexes" do
+  describe "#current_wordlist_indexes" do
     it "should return an array of indexes corresponding to wordlist positions of current words" do
       m = multiplier
       m.instance_variable_set(
@@ -45,12 +45,12 @@ describe Multiply::Multiplier do
         mock(Multiply::Words, :all => ["one", "two", "three", "four", "five"])
       )
       m.stub(:current).and_return(["two", "four", "one"])
-      m.current_indexes.should eql([1, 3, 0])
+      m.current_wordlist_indexes.should eql([1, 3, 0])
     end
   end
 
   describe "#next" do
-    it "returns a word determined by multiplication"
+    it "returns a word from wordlist determined by multiplication"
     it "increments @indexes values"
 
     context "@indexes value is greater than length of corresponding @texts value" do
