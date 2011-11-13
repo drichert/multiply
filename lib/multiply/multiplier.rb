@@ -19,7 +19,7 @@ module Multiply
     end
 
     def next
-      word = @words.all[next_index]
+      word = next_index.nil? ? "--" : @words.all[next_index]
       increment_indexes
       word
     end

@@ -65,6 +65,13 @@ describe Multiply::Multiplier do
       end
     end
 
+    context "when all of the current words are not found in wordlist" do
+      it "should return '--'" do
+        multiplier.stub(:current_wordlist_indexes).and_return([nil] * 3)
+        multiplier.next.should == "--"
+      end
+    end
+
     describe "increments @indexes values" do
       it "should increment each @indexes value by 1" do
         orig_indexes = multiplier.instance_variable_get(:@indexes).dup
