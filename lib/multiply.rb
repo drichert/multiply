@@ -1,3 +1,5 @@
+$:.unshift(File.dirname(__FILE__))
+
 module Multiply
   VERSION = "0.0.1"
 

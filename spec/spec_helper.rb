@@ -1,8 +1,5 @@
-$:.unshift(File.expand_path(__FILE__, "../lib"))
-
 require 'yaml'
 require 'multiply'
-
 
 def text_strings
   [
