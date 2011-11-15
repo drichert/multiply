@@ -14,14 +14,6 @@ describe Multiply::Texts do
       }
     end
 
-    describe "sets up @indexes array to track index positions in @texts" do
-      it "sets all @indexes values to 0" do
-        indexes = @texts.instance_variable_get(:@indexes)
-        texts   = @texts.instance_variable_get(:@texts)
-        indexes.should eql([0] * texts.length)
-      end
-    end
-
     it "assigns loaded texts as arrays to @texts array" do
       @texts.instance_variable_get(:@texts).each {|txt|
         txt.should be_an(Array)

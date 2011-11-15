@@ -8,7 +8,6 @@ module Multiply
       end
 
       @texts = process_texts(texts)
-      @indexes = ([0] * @texts.length)
     end
 
     private
