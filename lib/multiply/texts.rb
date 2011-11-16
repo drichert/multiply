@@ -25,5 +25,7 @@ module Multiply
         end
       end
 
+      def find_whitespace
+      end
   end
 end
