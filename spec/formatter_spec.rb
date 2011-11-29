@@ -22,11 +22,14 @@ module Multiply
       end
 
       context "second call" do
-        its(:next) { should == "\t" }
-      end
+        before do
+          @f = formatter
+          @f.next
+        end
 
-      context "third call" do
-        its(:next) { should == "-" }
+        subject { @f }
+
+        its(:next) { should == "\t" }
       end
 
       it "increments @index" do
