@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Multiply
   describe Formatter do
-    let(:format)    { "--\t-\n-  -" }
+    let(:format)    { "X XX\tX\nX  X" }
     let(:formatter) { Formatter.new(format) }
 
     subject { formatter }
@@ -13,16 +13,16 @@ module Multiply
     end
 
     describe "#current" do
-      its(:current) { should == "-" }
+      its(:current) { should == "X" }
     end
 
     describe "#next" do
-      context "format is \"--\\t-\\n- -\"" do
+      context "format is \"X X\\tX\\nX  X\"" do
         before { @fmtr = formatter }
 
         context "first call" do
           subject { @fmtr.next }
-          it      { should == "-" }
+          it      { should == "X" }
         end
 
         context "second call" do
@@ -31,12 +31,21 @@ module Multiply
             @fmtr.next
           }
 
-          it { should == "-" }
+          it { should == " " }
         end
 
         context "third call" do
           subject {
             2.times { @fmtr.next }
+            @fmtr.next
+          }
+
+          it { should == "XX" }
+        end
+
+        context "fourth call" do
+          subject {
+            3.times { @fmtr.next }
             @fmtr.next
           }
 
