@@ -54,11 +54,7 @@ module Multiply
       end
 
       it "increments @index" do
-        expect {
-          formatter.next
-        }.to change {
-          formatter.instance_variable_get(:@index)
-        }.by(1)
+        expect { formatter.next }.to change { formatter.index }.from(0).to(1)
       end
     end
   end
