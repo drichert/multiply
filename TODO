@@ -1,3 +1,0 @@
-Formatter needs to break format string on x and spaces, so #next/#current
-doesn't return strings of multiple x's
-
