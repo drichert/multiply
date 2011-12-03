@@ -57,5 +57,16 @@ module Multiply
         expect { formatter.next }.to change { formatter.index }.from(0).to(1)
       end
     end
+
+    describe "#format_text" do
+      let(:format) { "X XX\tX\nX  X" }
+      let(:text)   { %w{This is test text} }
+
+      subject { Formatter.new(format).format_text(text) }
+
+      it { should == "This is\ttest\ntext" }
+
+    end
+
   end
 end
