@@ -1,12 +1,11 @@
+require 'spec_helper'
+
 module Multiply
   describe Generator do
-    subject {
-      Generator.new
-    }
+    subject { Generator.new(*text_strings) }
 
-    describe "#initialize" do
-    end
-
+    its(:formatter)  { should be_a(Formatter) }
+    its(:multiplier) { should be_a(Multiplier) }
   end
 end
 

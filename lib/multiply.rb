@@ -8,6 +8,7 @@ module Multiply
   autoload :Texts,      'multiply/texts'
   autoload :Multiplier, 'multiply/multiplier'
   autoload :Formatter,  'multiply/formatter'
+  autoload :Generator,  'multiply/generator'
 
   class << self
     def base_path
