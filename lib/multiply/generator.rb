@@ -8,6 +8,10 @@ module Multiply
     end
 
     def generate(num_words)
+      words = []
+      num_words.times { words << multiplier.next }
+
+      formatter.format_text(words)
     end
   end
 end
