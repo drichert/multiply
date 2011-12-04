@@ -1,6 +1,11 @@
 require 'yaml'
 require 'multiply'
 
+RSpec.configure do |cfg|
+  cfg.color_enabled = true
+  cfg.formatter     = "documentation"
+end
+
 def text_strings
   [
     "This is a long text. This text is longer than the short text.",
