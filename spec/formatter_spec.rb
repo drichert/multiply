@@ -59,12 +59,31 @@ module Multiply
     end
 
     describe "#format_text" do
-      let(:format) { "X XX\tX\nX  X" }
       let(:text)   { %w{This is test text} }
 
-      subject { Formatter.new(format).format_text(text) }
+      context "format is \"X XX\\t\\nX  X\"" do
+        let(:format) { "X X\tX\nX  X" }
 
-      it { should == "This is\ttest\ntext" }
+        subject { Formatter.new(format).format_text(text) }
+
+        it { should == "This is\ttest\ntext" }
+      end
+
+      context "format is \"X \"" do
+        let(:format) { "X " }
+
+        subject { Formatter.new(format).format_text(text) }
+
+        it { should == "This is test text" }
+      end
+
+      context "format is \"X X       X\\tX  \"" do
+        let(:format) { "X X       X\tX  " }
+
+        subject { Formatter.new(format).format_text(text) }
+
+        it { should == "This is       test\ttext" }
+      end
 
     end
 

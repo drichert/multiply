@@ -42,7 +42,7 @@ module Multiply
     private
       def load_format(format_str)
         @format = WrapArray.new(
-          format_str.strip.scan(/(?:\w+|\s+)/)
+          format_str.scan(/(?:\w+|\s+)/)
         )
       end
   end
