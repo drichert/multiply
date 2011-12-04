@@ -16,26 +16,46 @@ module Multiply
       Words.stub(:new).and_return(mock_words)
     end
 
-    subject { Generator.new(*text_strings) }
+    subject { Generator.new(:texts => text_strings) }
 
     its(:formatter)  { should be_a(Formatter) }
     its(:multiplier) { should be_a(Multiplier) }
 
+    it "requires texts from :texts option" do
+      expect { Generator.new }.to raise_error
+    end
+
+    describe "accepts an optional :format option" do
+      let(:format)       { "x x x\tx" }
+      let(:format_array) { ["x", " ", "x", " ", "x", "\t", "x" ] }
+
+      context ":format option is \"x x x\\tx\"" do
+        subject {
+          Generator.new(
+            :texts  => text_strings,
+            :format => format
+          ).formatter.format
+        }
+
+        it { should == format_array }
+      end
+    end
+
     describe "#generate" do
       context "1 passed in" do
-        subject { Generator.new(*text_strings).generate(1) }
+        subject { Generator.new(:texts => text_strings).generate(1) }
 
         it { should == "This" }
       end
 
       context "2 passed in" do
-        subject { Generator.new(*text_strings).generate(2) }
+        subject { Generator.new(:texts => text_strings).generate(2) }
 
         it { should == "This text" }
       end
 
       context "9 passed in" do
-        subject { Generator.new(*text_strings).generate(9) }
+        subject { Generator.new(:texts => text_strings).generate(9) }
 
         it { should == "This text a the longer This text. text. This" }
       end

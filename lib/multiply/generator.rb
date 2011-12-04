@@ -2,9 +2,9 @@ module Multiply
   class Generator
     attr_reader :formatter, :multiplier
 
-    def initialize(*texts)
-      @formatter  = Formatter.new("x ")
-      @multiplier = Multiplier.new(*texts)
+    def initialize(options = {})
+      @formatter  = Formatter.new(options[:format] || "x ")
+      @multiplier = Multiplier.new(*options[:texts])
     end
 
     def generate(num_words)
