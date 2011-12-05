@@ -1,7 +1,7 @@
 $:.unshift(File.dirname(__FILE__))
 
 module Multiply
-  VERSION = "0.0.1"
+  VERSION = "0.0.2"
 
   autoload :WrapArray,  'multiply/wrap_array'
   autoload :Words,      'multiply/words'
