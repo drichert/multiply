@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe Multiply::Words do
+  let(:words) { %w{The dwarves of yore} }
   let(:lists) { %w{acronym alnum cap lower mixed} }
   let(:mw) { Multiply::Words.new }
 
@@ -9,6 +10,11 @@ describe Multiply::Words do
       lists.each {|list|
         mw.send(list.to_sym).should be_a(Multiply::WrapArray)
       }
+    end
+
+    it "accepts :words option" do
+      m = Multiply::Words.new(:words => words)
+      m.instance_variable_get(:@words).should_not be_nil
     end
   end
 
@@ -50,14 +56,25 @@ describe Multiply::Words do
       mw.all.should be_a(Multiply::WrapArray)
     end
 
-    it "returns an array of all words" do
-      pending "Takes a long time to run this spec"
+    context ":words option given" do
+      let(:words) { %w{The dwarves of yore} }
+      let(:mw) { Multiply::Words.new(:words => words) }
 
-      lists.each {|list|
-        mw.send(list.to_sym).each {|word|
-          mw.all.should include(word)
+      it "returns the array passed in on :words option" do
+        mw.all.should == words
+      end
+    end
+
+    context ":words option not given" do
+      it "returns an array of all words" do
+        pending "Takes a long time to run this spec"
+
+        lists.each {|list|
+          mw.send(list.to_sym).each {|word|
+            mw.all.should include(word)
+          }
         }
-      }
+      end
     end
   end
 
