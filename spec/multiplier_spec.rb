@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe Multiply::Multiplier do
   let(:multiplier) {
-    Multiply::Multiplier.new(*text_strings)
+    Multiply::Multiplier.new(:texts => text_strings)
   }
+
   let(:mock_words) {
     mock(
       Multiply::Words,
@@ -35,6 +36,15 @@ describe Multiply::Multiplier do
         indexes.length.should eql(texts.length)
       end
     end
+
+    #describe ":words option" do
+    #  let(:words) { %w{The dwarves of yore} }
+
+    #  it "specifies wordlist to use for @words" do
+    #    Words.should_receive(:new).with(:words => words)
+    #    Multiply::Multiplier.new(*text_strings, :words => words)
+    #  end
+    #end
   end
 
   describe "#current" do
@@ -84,7 +94,9 @@ describe Multiply::Multiplier do
 
     context "@indexes value is greater than length of corresponding @texts value" do
       it "resets @indexes value to 0" do
-        m = Multiply::Multiplier.new(["a", "b", "c", "d"], ["e", "f", "g"])
+        m = Multiply::Multiplier.new(
+          :texts => [["a", "b", "c", "d"], ["e", "f", "g"]]
+        )
         m.instance_variable_set(:@indexes, [3, 2])
         m.next
         m.instance_variable_get(:@indexes)[0].should == 0
