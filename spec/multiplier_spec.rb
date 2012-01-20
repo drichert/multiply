@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Multiply::Multiplier do
   let(:mul) { Multiply::Multiplier.new(:texts => text_strings) }
 
-  let(:mock_words) {
+  let(:words) {
     mock(
       Multiply::Words,
       :all => Multiply::WrapArray.new(["one", "two", "three", "four", "five"])
@@ -53,7 +53,7 @@ describe Multiply::Multiplier do
 
   describe "#current_wordlist_indexes" do
     it "should return an array of indexes corresponding to wordlist positions of current words" do
-      mul.instance_variable_set(:@words, mock_words)
+      mul.instance_variable_set(:@words, words)
       mul.stub(:current).and_return(["two", "four", "one"])
       mul.current_wordlist_indexes.should eql([1, 3, 0])
     end
@@ -61,7 +61,7 @@ describe Multiply::Multiplier do
 
   describe "#next" do
     it "returns a word from wordlist determined by multiplication" do
-      mul.instance_variable_set(:@words, mock_words)
+      mul.instance_variable_set(:@words, words)
       mul.stub(:current_wordlist_indexes).and_return([1, 2, 3])
       mul.next.should == "two"
     end
