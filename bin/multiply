@@ -4,13 +4,21 @@ $:.unshift(File.expand_path('../../lib', __FILE__))
 
 require 'multiply'
 
-files = ARGV.map {|path| File.open(path) }
-m = Multiply::Multiplier.new(*files)
+texts = ARGV.map {|path| File.open(path) }
 
-loop do
-  if m.cycle_complete?
-    puts "**** **** **** ****"
-  end
+gen = Multiply::Generator.new(
+  :texts  => texts,
+  :format => "x x\nx x x\nx x x x\n\n"
+)
 
-  print "#{m.next} "
-end
+puts gen.generate(100)
+
+#m = Multiply::Multiplier.new(*files)
+
+#loop do
+#  if m.cycle_complete?
+#    puts "**** **** **** ****"
+#  end
+#
+#  print "#{m.next} "
+#end

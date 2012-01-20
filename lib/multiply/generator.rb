@@ -4,7 +4,7 @@ module Multiply
 
     def initialize(options = {})
       @formatter  = Formatter.new(options[:format] || "x ")
-      @multiplier = Multiplier.new(*options[:texts])
+      @multiplier = Multiplier.new(:texts => options[:texts])
     end
 
     def generate(num_words)

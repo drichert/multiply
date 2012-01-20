@@ -1,8 +1,10 @@
 module Multiply
   class Multiplier
-    def initialize(*texts)
-      @words   = Words.new
-      @texts   = Texts.new(*texts)
+    def initialize(options = {})
+      raise ArgumentError, "missing :texts option" if options[:texts].nil?
+
+      @words   = Words.new({ :words => options[:words] || nil })
+      @texts   = Texts.new(*options[:texts])
       @indexes = ([0] * @texts.texts.length)
     end
 
