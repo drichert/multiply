@@ -12,9 +12,17 @@ describe Multiply::Words do
       }
     end
 
-    it "accepts :words option" do
-      m = Multiply::Words.new(:words => words)
-      m.instance_variable_get(:@words).should_not be_nil
+    describe ":words option" do
+      let(:mw) { Multiply::Words.new(:words => words) }
+
+      it "accepts :words option" do
+        mw.instance_variable_get(:@words).should_not be_nil
+      end
+
+      describe "@words" do
+        subject { mw.instance_variable_get(:@words) }
+        it { should be_a(Multiply::WrapArray) }
+      end
     end
   end
 

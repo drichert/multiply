@@ -11,7 +11,7 @@ module Multiply
     #
     def initialize(options = {})
       if options[:words]
-        @words = options[:words]
+        @words = WrapArray.new(options[:words])
       else
         @@lists.each {|list|
           f = File.open(
@@ -29,11 +29,7 @@ module Multiply
     end
 
     def all
-      if @words
-        WrapArray.new(@words)
-      else
-        WrapArray.new(acronym + alnum + cap + lower + mixed)
-      end
+      @words || WrapArray.new(acronym + alnum + cap + lower + mixed)
     end
   end
 end
