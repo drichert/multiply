@@ -11,7 +11,7 @@ gen = Multiply::Generator.new(
   :format => "x x\nx x x\nx x x x\n\n"
 )
 
-puts gen.generate(1000)
+puts gen.generate(100)
 
 #m = Multiply::Multiplier.new(*files)
 
