@@ -4,6 +4,7 @@ require 'multiply'
 RSpec.configure do |cfg|
   cfg.color_enabled = true
   cfg.formatter     = "documentation"
+  cfg.fail_fast     = true
 end
 
 def text_strings
